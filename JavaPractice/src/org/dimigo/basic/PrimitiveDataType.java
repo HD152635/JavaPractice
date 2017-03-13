@@ -12,7 +12,7 @@ package org.dimigo.basic;
  * 2. 작성일 : 2017. 3. 9.
  * </pre>
  *
- * @author      : 공경배
+ * @author      : 
  * @version     : 1.0
  */
 public class PrimitiveDataType {
@@ -30,6 +30,7 @@ public class PrimitiveDataType {
 		
 		System.out.println("<<아이유 프로필>>");
 		System.out.println("이름 :" + name + "\n성별 :" + ((isMale)?"남자":"여자"));
+		
 		System.out.println("나이 :" + age + "세 \n" + "키 :" + height + "cm");
 		System.out.println("몸무게 :" + weight + "kg\n혈액형 :" + bloodType + "형");
 
