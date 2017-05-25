@@ -9,7 +9,7 @@ public class DBTest {
 			System.out.println();
 		}
 	}
-	public static void crud(IDBManager db){
+	private static void crud(IDBManager db){
 		db.insert();
 		db.search();
 		db.update();
