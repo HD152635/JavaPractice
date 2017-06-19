@@ -1,13 +1,13 @@
 /**
  * 
  */
-package orp.perform.server;
+package org.perform.server;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import orp.perform.server.Hangeul.Dir;
+import org.perform.server.Hangeul.Dir;
 
 import java.io.BufferedReader;
 //import java.io.BufferedWriter;
@@ -31,7 +31,7 @@ import java.io.FileReader;
 public class index {
 	public static void main(String[] args) {
 		  try {
-				  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			 	  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		          BufferedReader reader = new BufferedReader(new FileReader("files/main.ah"));
 		           // Writer writer = new BufferedWriter(new FileWriter("files/menu.txt"));
 		           // BufferedReader reader = new BufferedReader(new FileReader("files/menu.txt"));) {
@@ -46,11 +46,13 @@ public class index {
 		         do{
 		        	 pos.x+=iMove.x;
 		        	 pos.y+=iMove.y;
+//		        	 System.out.println(pos.x + " " + pos.y "=>" + );
 		        	 int uni = (int)(code.get(pos.y).charAt(pos.x)) - '가';
-		        	 Hangeul h = new Hangeul(uni,new Dir(0,1));
-		        	 int  isEnd = h.isEnd();
+		        	 Hangeul h = new Hangeul(uni,iMove);
+		        	 int isEnd = h.isEnd();
 		        	 if(!Hangeul.isOn) break;
 		        	 iMove = h.execute();
+		        	 System.out.println(Storage.stacks.get(0));
 		         } while(true);
 		         br.close();
 		         reader.close();
