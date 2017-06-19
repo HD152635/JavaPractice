@@ -1,7 +1,7 @@
 /**
  * 
  */
-package orp.perform.server;
+package org.perform.server;
 
 import java.util.Stack;
 
@@ -59,10 +59,10 @@ public class Hangeul {
 		case 'ㅠ':
 			this.move = new Dir(0,2); break;
 		case 'ㅣ':
-			if(this.move.x == 1)
+			if(this.move.y == 0)
 				this.rvs();
 		case 'ㅡ':
-			if(this.move.y == 1)
+			if(this.move.x == 0)
 				this.rvs();
 		case 'ㅢ':
 				this.rvs();
@@ -83,10 +83,18 @@ public class Hangeul {
 	}
 	public Dir execute() throws Exception{
 		Stack<Integer> store = idxStack;
+		boolean isError = false;
 		int T = parseHan(cho,0);
 		switch(T){
-		
-				
+		case 'ㄷ': case 'ㄸ': case 'ㅌ': case 'ㄴ': case 'ㄹ':
+			if(store.size()<2){
+				isError = true;
+				this.rvs(); break;
+			}
+			swap(store);
+			break;
+		}
+		if(!isError) switch(T){
 		case 'ㄷ': store.push(store.pop()+store.pop()); break;
 		case 'ㄸ': store.push(store.pop()*store.pop()); break;
 		case 'ㅌ': store.push(store.pop()-store.pop()); break;
@@ -105,7 +113,7 @@ public class Hangeul {
 			switch(jongseong2){
 			case 'ㅇ': store.push(index.put("정수"));break;
 			case 'ㅎ':store.push(index.put("문자")); break;
-			default: store.push(parseInt(jongseong2)); break;
+			default: store.push(parseInt(jong)); break;
 			} break;
 		case 'ㅍ':
 			int jongseong3 = parseHan(jong,2);
@@ -113,9 +121,7 @@ public class Hangeul {
 			case 'ㅇ': 
 				break;
 			default: 
-				int top = store.pop();
-				int sec = store.pop();
-				store.push(top); store.push(sec);
+				swap(store);
 				break;
 			} break;
 			
@@ -134,9 +140,14 @@ public class Hangeul {
 				this.rvs();
 			break;
 		default:
-				throw new Exception("뜻하지 않은 종료");
+			break;
 		}
 		return move;
+	}
+	private void swap(Stack<Integer> store){
+		int top = store.pop();
+		int sec = store.pop();
+		store.push(top); store.push(sec);
 	}
 	private void rvs() {
 		move.x*=-1;
